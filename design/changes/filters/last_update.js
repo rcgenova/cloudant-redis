@@ -1,6 +1,6 @@
 function(doc, req) {
     
-    if (doc.last_update != "oculus001") {
+    if (doc.last_update != "[CLUSTER]") {
         return true;
     } else {
     	return false;
