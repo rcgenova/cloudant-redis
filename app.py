@@ -6,8 +6,9 @@ import redis
 from flask import Flask
 from flask import request
 
-BASE_URL = 'https://mpiederrioneoperabiromma:OQwSxvYeY5tnSbIcET4fLn7D@genova-oculus.cloudant.com/product'
-CLUSTER = 'oculus001'
+BASE_URL = 'https://[KEY]:[PASSWORD]@[USER].cloudant.com/product'
+CLUSTER = 'meritage'
+# CLUSTER = 'moonshine'
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
