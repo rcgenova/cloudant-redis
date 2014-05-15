@@ -4,7 +4,7 @@ import redis
 import pycurl
 import urllib
 
-BASE_URL = 'https://[KEY]:[PASSWORD]@[USER].cloudant.com/product'
+BASE_URL = 'https://mpiederrioneoperabiromma:OQwSxvYeY5tnSbIcET4fLn7D@genova-test1.cloudant.com/product'
 CHANGES_URL = BASE_URL + '/_changes?feed=continuous&filter=changes/last_update&since='
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
@@ -14,7 +14,7 @@ def stream(callback):
     while 1:
 
         # get last_seq stored in redis
-        if r.get('changes_last_seq'):
+        if not (r.get('changes_last_seq') is None):
             since = r.get('changes_last_seq')
         else:
             since = '0'
