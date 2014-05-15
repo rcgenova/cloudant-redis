@@ -4,7 +4,7 @@ import redis
 import pycurl
 import urllib
 
-BASE_URL = 'https://mpiederrioneoperabiromma:OQwSxvYeY5tnSbIcET4fLn7D@genova-test1.cloudant.com/product'
+BASE_URL = 'https://[KEY]:[PASSWORD]@[USER].cloudant.com/product'
 CHANGES_URL = BASE_URL + '/_changes?feed=continuous&filter=changes/last_update&since='
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
