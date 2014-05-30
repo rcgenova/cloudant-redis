@@ -55,7 +55,6 @@ def update_product():
 		r.set(request.json["_id"], data)
 		return str(response.status_code) + ": " + response.json()["rev"] + "\n"
 	else:
-		# lets possibly delete the cache entry here
 		return str(response.status_code) + "\n"
 
 if __name__ == '__main__':

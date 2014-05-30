@@ -155,15 +155,21 @@ In a new terminal window (TERMINAL2), SSH in to the us-east EC2 instance and tak
 
 You should now have two terminal windows open, each with five tabs. We will use the first tab in each to execute API requests against the local app server. We can monitor the other tabs for appropriate activity.
 
-## Step 4: Sample requests
+## Step 4: Execute sample requests
 
-From TERMINAL1, 
+Using TAB1 in either terminal window, execute a few sample requests. You will want to prefix your documents with the local cluster name/id to avoid conflicts. You can manipulate or view the cache directly from the Redis CLI (TAB3).
+
+To create a product:
 
 * curl -H "Content-Type: application/json" -X POST -d '{"_id":"moonshine-product1"}' http://localhost:5000/product
 
 * curl -H "Content-Type: application/json" -X POST -d '{"_id":"moonshine-product2","key1":"value1"}' http://localhost:5000/product
 
+To update an existing product:
+
 * curl -H "Content-Type: application/json" -X POST -d '{"_id":"moonshine-product2","_rev":"[REV]","key1":"value1","key2":"value2"}' http://localhost:5000/product
+
+To get an existing product:
 
 * curl http://localhost:5000/product/moonshine-product1
 
