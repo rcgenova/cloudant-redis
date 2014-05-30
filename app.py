@@ -6,18 +6,20 @@ import redis
 from flask import Flask
 from flask import request
 
-BASE_URL = 'https://[KEY]:[PASSWORD]@[USER].cloudant.com/product'
+BASE_URL = 'https://[KEY]:[KEYPASS]@[USER].cloudant.com/product'
 CLUSTER = 'meritage'
 # CLUSTER = 'moonshine'
 
+# Connect to Redis; requires Redis to be running
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Cloudant/Redis cache coherency sample app"
+    return "Cloudant/Redis caching example."
 
+# Get Product by Id
 @app.route('/product/<product_id>', methods = ['GET'])
 def get_product(product_id):
 
@@ -33,8 +35,12 @@ def get_product(product_id):
 		else:
 			return str(response.status_code) + "\n"
 
+# Insert/Update Product
 @app.route('/product', methods = ['POST'])
 def update_product():
+
+	# Clear the cache
+	r.delete(request.json["_id"])
 	
 	request.json['last_update'] = CLUSTER
 	request.json['doc_type'] = 'product'
@@ -49,6 +55,7 @@ def update_product():
 		r.set(request.json["_id"], data)
 		return str(response.status_code) + ": " + response.json()["rev"] + "\n"
 	else:
+		# lets possibly delete the cache entry here
 		return str(response.status_code) + "\n"
 
 if __name__ == '__main__':
